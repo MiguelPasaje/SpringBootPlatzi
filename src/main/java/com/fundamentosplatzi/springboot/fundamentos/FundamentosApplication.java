@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -97,6 +98,9 @@ public class FundamentosApplication implements CommandLineRunner {
 	private void getInformationJpqlFromUsers(){
 		 LOGGER.info("user con method findByUserEmail" + userRepository.findByUserEmail("lulu@gmail.com")
 				 .orElseThrow(()->new RuntimeException("No se encontro ningun email user")));
+
+		 userRepository.findAndSort("j", Sort.by("id").descending()).stream()
+				 .forEach(user ->  LOGGER.info("usuario con metodo sort " + user));
 	}
 
 
