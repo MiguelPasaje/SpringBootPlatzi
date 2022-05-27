@@ -51,6 +51,7 @@ public class FundamentosApplication implements CommandLineRunner {
 	public void run(String... args) { //method de CommandLineRunner
 		//classAnterior();
 		saveUserInDataBase();
+		getInformationJpqlFromUsers();
 
 	}
 
@@ -93,6 +94,10 @@ public class FundamentosApplication implements CommandLineRunner {
 
 	}
 
+	private void getInformationJpqlFromUsers(){
+		 LOGGER.info("user con method findByUserEmail" + userRepository.findByUserEmail("lulu@gmail.com")
+				 .orElseThrow(()->new RuntimeException("No se encontro ningun email user")));
+	}
 
 
 }
