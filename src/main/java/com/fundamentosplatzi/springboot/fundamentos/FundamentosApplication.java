@@ -88,14 +88,18 @@ public class FundamentosApplication implements CommandLineRunner {
 		User user13 = new User("xime","xime@gmail.com",LocalDate.of(2022,03,20));
 		User user14 = new User("antony","antony@gmail.com",LocalDate.of(2022,04,10));
 		User user15 = new User("lulu","lulu@gmail.com",LocalDate.of(2022,05,27));
+		User user16 = new User("user1","xime@gmail.com",LocalDate.of(2022,03,20));
+		User user17 = new User("user2","antony@gmail.com",LocalDate.of(2022,04,10));
+		User user18 = new User("user3","lulu@gmail.com",LocalDate.of(2022,05,27));
 
-		List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15);
+		List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15,user16,user17,user18);
 
 		list.stream().forEach(userRepository::save);
 
 	}
 
 	private void getInformationJpqlFromUsers(){
+/*
 		 LOGGER.info("user con method findByUserEmail" + userRepository.findByUserEmail("lulu@gmail.com")
 				 .orElseThrow(()->new RuntimeException("No se encontro ningun email user")));
 
@@ -114,6 +118,30 @@ public class FundamentosApplication implements CommandLineRunner {
 				+ userRepository.findByNameAndEmail("Daniela","dan@gmail.com")
 						.orElseThrow(()-> new RuntimeException("user no encontrado")));
 
+		userRepository.findByNameLike("%u%")
+				.stream()
+				.forEach(user -> LOGGER.info("user con method findByNameLike ->" + user));
+
+		userRepository.findByNameOrEmail(null,"dan@gmail.com")
+				.stream()
+				.forEach(user -> LOGGER.info(" \n method findByUserOrEmail ->" + user));
+
+		userRepository.findByNameOrEmail("Daniela","dan@gmail.com")
+				.stream()
+				.forEach(user -> LOGGER.info(" \n method findByUserOrEmail ->" + user));
+*/
+		userRepository
+				.findByBirthdayBetween(LocalDate.of(2022,1,1),LocalDate.of(2022,12,12))
+				.stream()
+				.forEach(user -> LOGGER.info("intervalo de fechas- >" + user));
+
+		userRepository.findByNameLikeOrderByIdDesc("%user%")
+				.stream()
+				.forEach(user -> LOGGER.info(" \n -- user encontrado con like y ordenado : -> "+ user));
+
+		userRepository.findByNameContainingOrderByIdDesc("user")
+				.stream()
+				.forEach(user -> LOGGER.info(" \n -- user encontrado con containing y ordenado : -> "+ user));
 	}
 
 
