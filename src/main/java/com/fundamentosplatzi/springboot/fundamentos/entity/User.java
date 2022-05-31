@@ -1,5 +1,6 @@
 package com.fundamentosplatzi.springboot.fundamentos.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class User {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)//"user" debe ser igual al del Post
     @JsonManagedReference
+    @JsonIgnore
     private List<Post> post = new ArrayList<>();
 
     public User() {
@@ -33,6 +35,10 @@ public class User {
         this.name = name;
         this.email = email;
         this.birthday = birthday;
+    }
+
+    public User(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
