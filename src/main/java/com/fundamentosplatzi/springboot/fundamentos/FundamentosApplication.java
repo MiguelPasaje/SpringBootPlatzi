@@ -142,6 +142,13 @@ public class FundamentosApplication implements CommandLineRunner {
 		userRepository.findByNameContainingOrderByIdDesc("user")
 				.stream()
 				.forEach(user -> LOGGER.info(" \n -- user encontrado con containing y ordenado : -> "+ user));
+
+		System.out.println("\n ------- \n");
+		/*named parameter*/
+		/* jpql named parameters*/
+		//LOGGER.info("el userio a partir del named parameter es : -> " + userRepository.getAllBirthDateAndEmail(LocalDate.of(2022,5,27),"lulu@gmail.com")
+		//		.orElseThrow(()->new RuntimeException("No se encontro el usuario a partir del named parameter")));
+
 	}
 
 
