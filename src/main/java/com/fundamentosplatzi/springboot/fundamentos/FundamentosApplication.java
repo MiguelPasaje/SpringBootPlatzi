@@ -90,12 +90,12 @@ public class FundamentosApplication implements CommandLineRunner {
 		User user10 = new User("jeny","jeny@gmail.com",LocalDate.of(2022,03,20));
 		User user11 = new User("juli","juli@gmail.com",LocalDate.of(2022,04,10));
 		User user12 = new User("clau","clau@gmail.com",LocalDate.of(2022,05,27));
-		User user13 = new User("xime","xime@gmail.com",LocalDate.of(2022,03,20));
+		User user13 = new User("xime","xime1@gmail.com",LocalDate.of(2022,03,20));
 		User user14 = new User("antony","antony@gmail.com",LocalDate.of(2022,04,10));
 		User user15 = new User("lulu","lulu@gmail.com",LocalDate.of(2022,05,27));
-		User user16 = new User("user1","xime@gmail.com",LocalDate.of(2022,03,20));
-		User user17 = new User("user2","antony@gmail.com",LocalDate.of(2022,04,10));
-		User user18 = new User("user3","lulu@gmail.com",LocalDate.of(2022,05,27));
+		User user16 = new User("user1","xime2@gmail.com",LocalDate.of(2022,03,20));
+		User user17 = new User("user2","antony3@gmail.com",LocalDate.of(2022,04,10));
+		User user18 = new User("user3","lulu4@gmail.com",LocalDate.of(2022,05,27));
 
 		List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11, user12, user13, user14, user15,user16,user17,user18);
 
@@ -159,12 +159,16 @@ public class FundamentosApplication implements CommandLineRunner {
 	private void saveWhitErrorTransactional(){
 		User tes1 = new User("Test1Transactional1","Test1Transactional1@domail.com",LocalDate.now());
 		User tes2 = new User("Test2Transactional1","Test2Transactional1@domail.com",LocalDate.now());
-		User tes3 = new User("Test3Transactional1","Test3Transactional1@domail.com",LocalDate.now());
+		User tes3 = new User("Test3Transactional1","Test1Transactional1@domail.com",LocalDate.now());
 		User tes4 = new User("Test4Transactional1","Test4Transactional1@domail.com",LocalDate.now());
 		User tes5 = new User("Test5Transactional1","Test5Transactional1@domail.com",LocalDate.now());
 
 		List<User> users = Arrays.asList(tes1,tes2,tes3,tes4,tes5);
-		userService.saveTransactional((users));
+		try {
+			userService.saveTransactional((users));
+		}catch (Exception e){
+			LOGGER.error("esta es una excepcion dentro del metodo transactional "+ e.getMessage());
+		}
 		userService.getAllUsers().stream()
 				.forEach(user ->
 						LOGGER.info("\n este es el user dentro del metodo transaccional " + user));
